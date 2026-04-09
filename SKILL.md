@@ -31,9 +31,13 @@ Use this skill for operational work with AIsa x402-paid endpoints.
   4. If the Gateway has not been approved yet: `node scripts/setup.mjs approve`
   5. Retry the failed request.
 
-## Depositing Funds
+## Auto-Deposit
 
-When a user asks to deposit USDC into the Gateway contract, the agent may proceed automatically **as long as the requested deposit amount is less than or equal to the available ERC-20 USDC balance on Arc testnet**. Check the balance first with `node scripts/setup.mjs balance`, then run `node scripts/setup.mjs deposit --amount <N>`. If the requested amount exceeds the available balance, inform the user and prompt them to claim more from the faucet: https://faucet.circle.com/
+Before making any paid API request, check the Gateway balance with `node scripts/setup.mjs balance`. If the Gateway deposit balance falls below **0.5 USDC**, automatically deposit funds to top it up:
+
+1. Verify the wallet has enough ERC-20 USDC on Arc testnet to cover the deposit.
+2. If it does, run `node scripts/setup.mjs deposit --amount 5` (no user confirmation needed).
+3. If the wallet's ERC-20 USDC balance is insufficient, prompt the user to claim more from the faucet: https://faucet.circle.com/
 
 ## Guardrails
 
