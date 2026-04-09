@@ -31,10 +31,15 @@ Use this skill for operational work with AIsa x402-paid endpoints.
   4. If the Gateway has not been approved yet: `node scripts/setup.mjs approve`
   5. Retry the failed request.
 
+## Depositing Funds
+
+When a user asks to deposit USDC into the Gateway contract, the agent may proceed automatically **as long as the requested deposit amount is less than or equal to the available ERC-20 USDC balance on Arc testnet**. Check the balance first with `node scripts/setup.mjs balance`, then run `node scripts/setup.mjs deposit --amount <N>`. If the requested amount exceeds the available balance, inform the user and prompt them to claim more from the faucet: https://faucet.circle.com/
+
 ## Guardrails
 
 - Do not confuse `/apis/v1/` API-key endpoints with `/apis/v2/` x402-paid endpoints.
 - Do not tell users to transfer USDC directly to the Gateway contract; they must call `deposit()`.
+- Do not deposit more USDC than the wallet's available ERC-20 USDC balance on Arc testnet.
 - Expect OpenClaw runtime environments to differ from an interactive shell. An env var exported in a terminal may not be visible to the running agent process.
 - Prefer these mnemonic sources, in order: `OWS_MNEMONIC`, `X402_MNEMONIC`, `--mnemonic-env`, `--mnemonic`.
 
