@@ -183,7 +183,7 @@ For the complete catalog with all endpoints, see [SKILL.md](./SKILL.md#full-x402
 | `invalid_signature` | Use `extra.verifyingContract` from the 402 response as the EIP-712 domain `verifyingContract`, not the asset address |
 | `insufficient_balance` | Deposit USDC into the Gateway contract via `deposit()` |
 | `UnsupportedChain` (ows CLI) | Use the JS client — `ows pay request` has a known issue matching EVM testnet chain IDs |
-| `500 Invalid price: $0.000000` | Some free endpoints ($0) error on x402 — use API key auth for those |
+| `500 Invalid price: $0.000000` | Server-side pricing bug — free endpoints ($0) should still be processed as regular x402 payments |
 
 ## Resources
 
